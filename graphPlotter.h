@@ -6,5 +6,8 @@ class GraphPlotter
 {
 public:
     GraphPlotter();
-    static void drawFuncPlot(QCustomPlot *plotWidget);
+    static void PlotFunction(QCustomPlot *plotWidget,
+                             QVector<double> const &xValues,
+                             QVector<double> const &yValues
+                             );
 };

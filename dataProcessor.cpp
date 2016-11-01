@@ -47,3 +47,21 @@ QVector<double> DataProcessor::addSpikeValues(const QVector<double> &yValues, in
 
     return result;
 }
+
+QVector<double> DataProcessor::amplitudeSpectrum(const QVector<double> &yValues)
+{
+    int N = yValues.size();
+    QVector<double> result(N);
+    for (int k = 0; k < N; ++k) {
+        double re = 0;
+        double im = 0;
+        for (int n = 0; n < N; ++n) {
+            re += yValues[n] * cos(2 * M_PI * k * n / N);
+            im += yValues[n] * sin(2 * M_PI * k * n / N);
+        }
+        re /= N;
+        im /= N;
+        result[k] = sqrt(im * im + re * re);
+    }
+    return result;
+}
