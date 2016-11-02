@@ -2,6 +2,7 @@
 
 #include <QVector>
 #include <qmath.h>
+#include <ctime>
 
 class DataProcessor
 {
