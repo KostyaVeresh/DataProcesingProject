@@ -19,13 +19,15 @@ SOURCES += main.cpp\
     graphPlotter.cpp \
     ../qcustomplot/qcustomplot.cpp \
     dataGenerator.cpp \
-    dataReader.cpp
+    dataReader.cpp \
+    statistics.cpp
 
 HEADERS  += mainwindow.h \
     dataProcessor.h \
     graphPlotter.h \
     ../qcustomplot/qcustomplot.h \
     dataGenerator.h \
-    dataReader.h
+    dataReader.h \
+    statistics.h
 
 FORMS    += mainwindow.ui

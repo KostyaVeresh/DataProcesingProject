@@ -5,6 +5,14 @@ DataProcessor::DataProcessor()
 
 }
 
+QVector<double> DataProcessor::addAnotherFunction(const QVector<double> &first, const QVector<double> &second) {
+    QVector<double> result(first.size());
+    for (int i = 0; i < first.size(); ++i) {
+        result[i] = first[i] + second[i];
+    }
+    return result;
+}
+
 QVector<double> DataProcessor::harmonicFunc(size_t size, double discreteStep, double frequency)
 {
     QVector<double> result(size);
