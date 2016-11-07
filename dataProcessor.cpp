@@ -13,16 +13,6 @@ QVector<double> DataProcessor::addAnotherFunction(const QVector<double> &first, 
     return result;
 }
 
-QVector<double> DataProcessor::harmonicFunc(size_t size, double discreteStep, double frequency)
-{
-    QVector<double> result(size);
-    for (int i = 0; i < size; ++i) {
-        double xPoint = i * discreteStep;
-        result[i] = 10 * qSin(2 * M_PI * frequency * xPoint);
-    }
-    return result;
-}
-
 QVector<double> DataProcessor::addSpikeValues(const QVector<double> &yValues, int numberOfSpikes, int spikeOrder)
 {
     QVector<double> result = yValues;
@@ -53,6 +43,33 @@ QVector<double> DataProcessor::addSpikeValues(const QVector<double> &yValues, in
         randomGen.removeLast();
     }
 
+    return result;
+}
+
+QVector<double> DataProcessor::eliminateSpikeValues(const QVector<double> &yValues, double lowerBound, double upperBound) {
+    QVector<double> result;
+    for (double num : yValues) {
+        if (num >= lowerBound && num <= upperBound) {
+            result.append(num);
+        }
+    }
+    return result;
+}
+
+QVector<double> DataProcessor::addShift(const QVector<double> &yValues, double shift) {
+    QVector<double> result(yValues);
+    for (int i = 0; i < yValues.size(); ++i) {
+        result[i] = yValues[i] + shift;
+    }
+    return result;
+}
+
+QVector<double> DataProcessor::eliminateShift(const QVector<double> &yValues) {
+    QVector<double> result(yValues.size());
+    double shift = Statistics::expectation(yValues);
+    for (int i = 0; i < yValues.size(); ++i) {
+        result[i] = yValues[i] - shift;
+    }
     return result;
 }
 

@@ -5,7 +5,14 @@ GraphPlotter::GraphPlotter()
 
 }
 
-void GraphPlotter::PlotFunction(QCustomPlot *plotWidget,
+void GraphPlotter::setAxisRange(QCustomPlot *plotWidget,
+                                double xRange1, double xRange2,
+                                double yRange1, double yRange2) {
+    plotWidget->xAxis->setRange(xRange1, xRange2);
+    plotWidget->yAxis->setRange(yRange1, yRange2);
+}
+
+void GraphPlotter::plotFunction(QCustomPlot *plotWidget,
                                 const QVector<double> &xValues,
                                 const QVector<double> &yValues
                                 ) {

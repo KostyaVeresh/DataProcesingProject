@@ -1,7 +1,10 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
+
+#include "dataGenerator.h"
+#include "dataProcessor.h"
+#include "graphPlotter.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +19,9 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
-};
+    void printSpikePlots();
 
-#endif // MAINWINDOW_H
+    Ui::MainWindow *ui;
+    int sizeN;
+    double discreteStep;
+};

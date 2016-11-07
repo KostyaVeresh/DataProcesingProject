@@ -5,6 +5,23 @@ DataGenerator::DataGenerator()
 
 }
 
+QVector<double> DataGenerator::generateDiscreteStepVector(size_t size, double discreteStep) {
+    QVector<double> result(size);
+    for (size_t i = 0; i < size; ++i) {
+        result[i] = i * discreteStep;
+    }
+    return result;
+}
+
+QVector<double> DataGenerator::generateHarmonicFunc(size_t size, double discreteStep, double frequency, double amplitude) {
+    QVector<double> result(size);
+    for (size_t i = 0; i < size; ++i) {
+        double xPoint = i * discreteStep;
+        result[i] = amplitude * qSin(2 * M_PI * frequency * xPoint);
+    }
+    return result;
+}
+
 QVector<double> DataGenerator::generateDefaultRandomVector(size_t size, unsigned int seed, double first, double second)
 {
     QVector<double> randomVector(size);
