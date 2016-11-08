@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QVector>
+#include <QFile>
+#include <QTextStream>
 
 class DataReader
 {

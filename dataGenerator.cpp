@@ -13,6 +13,14 @@ QVector<double> DataGenerator::generateDiscreteStepVector(size_t size, double di
     return result;
 }
 
+QVector<double> DataGenerator::generateConstantVector(size_t size, double value) {
+    QVector<double> result(size);
+    for (int i = 0; i < size; ++i) {
+        result[i] = value;
+    }
+    return result;
+}
+
 QVector<double> DataGenerator::generateTrend(size_t size, double discreteStep, int multiply) {
     QVector<double> result(size);
     for (int i = 0; i < size / 3; ++i) {
@@ -45,7 +53,8 @@ QVector<double> DataGenerator::generateDefaultRandomVector(size_t size, unsigned
     QVector<double> randomVector(size);
        srand(seed);
        for (size_t i = 0; i < size; ++i) {
-           randomVector[i] = ((double)rand() / (double)RAND_MAX);
+           double randValue = ((double)rand() / (double)RAND_MAX);
+           randomVector[i] = randValue * (second - first) + first;
        }
 
        return randomVector;
