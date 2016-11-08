@@ -13,6 +13,24 @@ QVector<double> DataGenerator::generateDiscreteStepVector(size_t size, double di
     return result;
 }
 
+QVector<double> DataGenerator::generateTrend(size_t size, double discreteStep, int multiply) {
+    QVector<double> result(size);
+    for (int i = 0; i < size / 3; ++i) {
+        double pointX = i * discreteStep;
+        result[i] = multiply * pointX;
+    }
+    for (int i = size / 3; i < 2 * size / 3; ++i) {
+        double pointX = i * discreteStep;
+        result[i] = multiply * (- 2 * pointX / 5 + 7 * size * discreteStep / 15);
+    }
+    for (int i = 2 * size / 3; i < size; ++i) {
+        double pointX = i * discreteStep;
+        result[i] = multiply * (9 * pointX / 10 - 2 * size * discreteStep / 5);
+    }
+
+    return result;
+}
+
 QVector<double> DataGenerator::generateHarmonicFunc(size_t size, double discreteStep, double frequency, double amplitude) {
     QVector<double> result(size);
     for (size_t i = 0; i < size; ++i) {
