@@ -20,6 +20,7 @@ public:
 
 private:
     void printSpikePlots();
+    void testConvolution();
 
     Ui::MainWindow *ui;
     int sizeN;

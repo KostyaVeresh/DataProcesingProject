@@ -4,11 +4,33 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    sizeN(500),
-    discreteStep(0.01)
+    sizeN(1000),
+    discreteStep(0.005)
 {
     ui->setupUi(this);
-    printSpikePlots();
+    //printSpikePlots();
+    testConvolution();
+}
+
+void MainWindow::testConvolution() {
+    QVector<double> xs = DataGenerator::generateDiscreteStepVector(sizeN, discreteStep);
+    QVector<double> ys(sizeN);
+    ys[200] = 100 * discreteStep;
+    ys[400] = ys[200];
+    ys[600] = ys[200];
+    QVector<double> xs2 = DataGenerator::generateDiscreteStepVector(200, discreteStep);
+    QVector<double> ys2 = DataGenerator::generateHarmonicFunc(200, discreteStep, 14, 1);
+    QVector<double> ys3(200);
+    for (int i = 0; i < 200; ++i) {
+        ys3[i] = exp(-42 * i * discreteStep);
+    }
+    QVector<double> ys4 = DataProcessor::multiplyAnotherFunction(ys2, ys3);
+    QVector<double> xs5 = DataGenerator::generateDiscreteStepVector(sizeN + 200, discreteStep);
+    QVector<double> ys5 = DataProcessor::convolution(ys, ys4);
+    GraphPlotter::setAxisRange(ui->widget, 0, sizeN * discreteStep, 0, 120 * discreteStep);
+    GraphPlotter::plotFunction(ui->widget, xs, ys);
+    GraphPlotter::setAxisRange(ui->widget_2, 0, (200 + sizeN) * discreteStep, -0.5, 0.5);
+    GraphPlotter::plotFunction(ui->widget_2, xs5, ys5);
 }
 
 void MainWindow::printSpikePlots() {

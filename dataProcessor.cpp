@@ -13,6 +13,14 @@ QVector<double> DataProcessor::addAnotherFunction(const QVector<double> &first, 
     return result;
 }
 
+QVector<double> DataProcessor::multiplyAnotherFunction(const QVector<double> &first, const QVector<double> &second) {
+    QVector<double> result(first.size());
+    for (int i = 0; i < first.size(); ++i) {
+        result[i] = first[i] * second[i];
+    }
+    return result;
+}
+
 QVector<double> DataProcessor::addSpikeValues(const QVector<double> &yValues, int numberOfSpikes, int spikeOrder)
 {
     QVector<double> result = yValues;
@@ -87,6 +95,20 @@ QVector<double> DataProcessor::amplitudeSpectrum(const QVector<double> &yValues)
         re /= N;
         im /= N;
         result[k] = sqrt(im * im + re * re);
+    }
+    return result;
+}
+
+QVector<double> DataProcessor::convolution(const QVector<double> &yValues, const QVector<double> &hValues) {
+    int N = yValues.size();
+    int M = hValues.size();
+    QVector<double> result(M + N);
+    for (int k = 0; k < M + N; ++k) {
+        for (int i = 0; i < M; ++i) {
+            if (k - i < 0 || k - i > N - 1)
+                continue;
+            result[k] += yValues[k - i] * hValues[i];
+        }
     }
     return result;
 }
